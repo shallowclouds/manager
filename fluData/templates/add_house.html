@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block left_col %}
+    <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="#">房源管理</a>
+                    <a style="float:right;" href="#">+</a>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-stack">
+                        <li><a href="/user/house/add">添加房源</a></li>
+                        <li><a href="/user/house/alter">修改房源</a></li>
+                        <li><a href="/user/house/find">查找房源</a></li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+{% endblock %}
+
+{% block center %}
+
+    <div class="col-md-10">
+        <div class="alert alert-success" role="alert" id="tips" style="display: none">
+            提交成功！
+        </div>
+        <div class="alert alert-info" role="alert" id="tip1">
+            请注意，提交成功后不要重复提交QwQ！
+        </div>
+        <span class="col-md-2"></span>
+        <div class="col-md-6">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">姓名</span>
+                <input type="text" class="form-control" placeholder="客户姓名" aria-describedby="basic-addon1" id="name">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">小区</span>
+                <input type="text" class="form-control" placeholder="小区" aria-describedby="basic-addon1" id="community">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">电话</span>
+                <input type="text" class="form-control" placeholder="客户电话号码" aria-describedby="basic-addon1" id="phone">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">价格</span>
+                <input type="text" class="form-control" placeholder="价格" aria-describedby="basic-addon1" id="price">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">面积</span>
+                <input type="text" class="form-control" placeholder="面积" aria-describedby="basic-addon1" id="area">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">位置</span>
+                <input type="text" class="form-control" placeholder="位置" aria-describedby="basic-addon1" id="pos">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">户型</span>
+                <input type="text" class="form-control" placeholder="户型" aria-describedby="basic-addon1" id="type">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">备注</span>
+                <input type="text" class="form-control" placeholder="备注" aria-describedby="basic-addon1" id="other">
+            </div>
+            <br>
+            <div>
+                <span class="col-sm-8"></span>
+                <button type="button" class="col-sm-4 btn btn-default btn-md" onclick="submitHouse()" id="submitbtn">提交</button>
+            </div>
+        </div>
+        <span class="col-md-2"></span>
+    </div>
+    <script>
+        $.ajaxSetup({
+                data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+                });
+        function submitsuccessfully(data) {
+            document.getElementById("tips").style.display="block";
+            if(data["res"]) {
+                document.getElementById("tips").innerHTML="提交成功！";
+                document.getElementById("submitbtn").disabled=true;
+            }
+            else {
+                document.getElementById("tips").classList.remove("alert-success");
+                document.getElementById("tips").classList.add("alert-danger");
+                document.getElementById("tips").innerHTML = "提交失败，请重试";
+            }
+        }
+        function submitHouse() {
+            var res={};
+            res["name"]=document.getElementById("name").value;
+            res["community"]=document.getElementById("community").value;
+            res["phone"]=document.getElementById("phone").value;
+            res["price"]=document.getElementById("price").value;
+            res["area"]=document.getElementById("area").value;
+            res["pos"]=document.getElementById("pos").value;
+            res["type"]=document.getElementById("type").value;
+            res["other"]=document.getElementById("other").value;
+            for(var i in res) {
+                if(i=="other")
+                    continue;
+                if (res[i] == "") {
+                    document.getElementById("tips").style.display = "block";
+                    document.getElementById("tips").classList.remove("alert-success");
+                    document.getElementById("tips").classList.add("alert-danger");
+                    document.getElementById("tips").innerHTML = "房源子项不能为空！请重新填写！";
+                    return;
+                }
+            }
+              //  console.log(res[i]);
+            $.ajax({
+                type:'POST',
+                url:'/user/house/add/',
+                data:res,
+                success:submitsuccessfully,
+                dataType:"json"
+            });
+
+        }
+    </script>
+{% endblock %}

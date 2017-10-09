@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style> 
+                p.endl
+                {
+                width:11em; 
+                word-wrap:break-word;
+                }
+        </style>
+    </head>
+    
+    <body>
+        
+    <title>管理页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/static/css.css">
+    <script src="/static/jquery-1.9.1.min.js"></script>
+    <script src="/static/bootstrap.min.js"></script>
+    
+    
+    <div class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/user/main">管理平台</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/user/main">总览</a></li>
+                    <li><a href="/user/house">房源</a></li>
+                    <li><a href="/user/client">客户</a></li>
+                    <li><a href="/user/achievement">业绩</a></li>
+                    <li><a href="/user/manage">管理</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right ng-scope" ng-controller="user_ctrl" id="header_me">
+                    <li>
+                        <a href="/user/main" wt-tracker="Header|Menu|Goto Apply">
+                            用户：{{ user.name }}
+                        </a>
+                        <!-- <iframe id="tmp_downloadhelper_iframe" style="display: none;" src="./static/frame0.html"></iframe> -->
+                    </li>
+                    <li>
+                        <a href="/user/main" wt-tracker="Header|Menu|Goto Apply">个人设置</a>
+                    </li>
+                    <li>
+                        <a href="/user/logout" wt-tracker="Header|Menu|Goto Apply">退出登陆</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        {% block left_col %}
+            
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="#">测试</a>
+                    <a style="float:right;" href="#">right</a>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-stack">
+                        <li>测试1</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        {% endblock %}
+
+        {% block center %}
+        
+        <div class="col-md-9">
+            <div class="row" >
+                <div class="col-sm-6 ">
+                    <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="panel-heading">
+                            <p class="panel-title">欢迎</p>
+                        </div>
+                        <p class="endl">
+                            欢迎使用数据管理系统QwQ
+                        </p>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 ">
+                    <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="panel-heading">
+                            <p class="panel-title">公告</p>
+                        </div>
+                        <p class="endl">
+                            您可以在此发布和删除公告
+                        </p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endblock %}
+    </div>
+    
+    </body></html>

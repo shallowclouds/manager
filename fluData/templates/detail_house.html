@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block left_col %}
+    <div class="col-md-2">
+           <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="#">房源管理</a>
+                    <a style="float:right;" href="#">+</a>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-stack">
+                        <li><a href="/user/house/add">添加房源</a></li>
+                        <li><a href="/user/house/alter">修改房源</a></li>
+                        <li><a href="/user/house/find">查找房源</a></li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+{% endblock %}
+
+{% block center %}
+    <div class="col-md-10">
+        <div class="jumbotron">
+            <h3 class="text-primary">房源详细信息</h3>
+            {% if not detail_house %}
+            <p>你可以查找房源并点击房源编号查看其详细信息。</p>
+            {% endif %}
+            {% if detail_house %}
+                <strong>房源编号：</strong>{{ detail_house.ID }}<br>
+                <strong>客户姓名：</strong>{{ detail_house.name }}<br>
+                <strong>所在小区：</strong>{{ detail_house.community }}<br>
+                <strong>客户电话：</strong>{{ detail_house.phone }}<br>
+                <strong>房子价格：</strong>{{ detail_house.price }}<br>
+                <strong>房子面积：</strong>{{ detail_house.area }}<br>
+                <strong>房子位置：</strong>{{ detail_house.pos }}<br>
+                <strong>房子户型：</strong>{{ detail_house.type }}<br>
+                <strong>备注：</strong>{{ detail_house.other }}<br>
+                <strong>钥匙编号：</strong>暂无<br>
+                <strong>登记人：</strong>暂无<br>
+                <strong>登记日期：</strong>暂无<br>
+
+
+            {% endif %}
+            <div>
+                <span class="col-sm-8"></span>
+                <button type="button" class="col-sm-4 btn btn-primary btn-md" onclick="submitHouse()" id="submitbtn">修改房源信息</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
