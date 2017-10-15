@@ -14,12 +14,11 @@
         
     <title>管理页面</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css.css">
     <script src="/static/jquery-1.9.1.min.js"></script>
-    <script src="/static/bootstrap.min.js"></script>
-    
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     
     <div class="navbar navbar-fixed-top navbar-inverse">
         <div class="container">
@@ -44,7 +43,6 @@
                         <a href="/user/main" wt-tracker="Header|Menu|Goto Apply">
                             用户：{{ user.name }}
                         </a>
-                        <!-- <iframe id="tmp_downloadhelper_iframe" style="display: none;" src="./static/frame0.html"></iframe> -->
                     </li>
                     <li>
                         <a href="/user/main" wt-tracker="Header|Menu|Goto Apply">个人设置</a>
@@ -56,7 +54,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         {% block left_col %}
             
         <div class="col-md-2">

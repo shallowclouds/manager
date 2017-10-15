@@ -25,6 +25,7 @@ def syncUsersToAdmin():
             tPerson=models.Person(pName=i.username,pPassword="null",pPhone="null")
             tPerson.save()
 
+
 class UserViews(object):
 
     def __init__(self):
@@ -195,6 +196,9 @@ class UserViews(object):
             return render(request, "error.html", {"error": {"title": "正在建设中=-=", "detail": "该页面正在建设中=-=，详情请联系管理员"}})
         return HttpResponseRedirect("/user/login/")
 
+    def testv(self,request):
+        return render(request,"test.html")
+
 
 
 
@@ -221,6 +225,9 @@ houseUrls=[
     url(r"^detail",userv.detail_housev,name="detail_house"),
 ]
 
+mainUrls=[
+
+]
 
 
 userUrls=[

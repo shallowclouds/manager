@@ -53,4 +53,5 @@ urlpatterns = [
     url(r'^$',views.index),
     url(r'^admin/', admin.site.urls),
     url(r'^user/',include(Users.userUrls)),
+    url(r'^test/',Users.userv.testv,name="test"),
 ]
