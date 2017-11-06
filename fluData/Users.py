@@ -14,6 +14,9 @@ from django.contrib import auth
 from django.contrib.auth import authenticate
 from . import models
 import json
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
+from . import models
 
 
 def syncUsersToAdmin():
@@ -67,7 +70,7 @@ class UserViews(object):
                 })
             # print(tcontext["house"][0])
             return render(request,"house.html",context=tcontext)
-        if request.method=="POST":
+        if request.method == "POST" :
 
             return render(request,"house.html")
 
@@ -167,7 +170,8 @@ class UserViews(object):
             return render(request,"achievement.html")
         return HttpResponseRedirect("/user/login/")
 
-    def mainv(self,request):
+    @login_required(login_url="login")
+    def mainv(request):
         syncUsersToAdmin()
         if request.user.is_authenticated():
             tmpuser=models.Person.objects.filter(pName=request.user.username)
@@ -199,9 +203,68 @@ class UserViews(object):
     def testv(self,request):
         return render(request,"test.html")
 
+def GetUserProfile(request):
+    # tUser=models.Person.objects.get(pName = request.user.username)
+    # proDict={
+    #     "name":tUser.pName,
+    #     "id":tUser.pID,
+    #     "phone":tUser.pPhone,
+    #     "type":tUser.pType,
+    # # }
+    request.session["profile"] = request.user.userprofile.get_profile_dict()
 
+def get_normal_context(request):
+    ndict = {
+        "user":{
+            "profile":request.session["profile"]
+            }
+            }
+    return ndict
 
+@login_required(login_url = "login")
+def mainv(request):
+    tcontext = get_normal_context(request)
+    return render(request, "main.html", tcontext)
+    
+    
 
+@require_http_methods(["GET", "POST"])
+def loginv(request):
+    # login_error={""}
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/user/main')
+    if request.method == "GET":
+        return render(request,"login.html")
+    if request.method == "POST":
+        if not ( ("username" in request.POST) and ("password" in request.POST) ):
+            return render(request,"login.html",{"login_error":["用户名或密码不能为空"]})
+        user_res=authenticate(username=request.POST["username"],password=request.POST["password"])
+        if user_res and (user_res.is_active):
+            auth.login(request,user_res)
+            return HttpResponseRedirect("/user/loading/")
+        else:
+            return render(request,"login.html",{"login_error":["密码或用户名有误，请重试"]})
+    return render(request,"login.html")
+
+def loadingv(request):
+    GetUserProfile(request)
+    return HttpResponseRedirect("/user/main/")
+
+@login_required(login_url = "login")
+def housev(request):
+    if request.method == "GET":#读取资源
+        print(request.body==b'')
+        if "key[]" in request.GET:
+            pass
+        else:
+            return render(request, "house.html")
+    elif request.method == "POST":#创建资源
+        pass
+    elif request.method == "PUT":#更新资源
+        pass
+    elif request.method == "DELETE":#删除资源
+        pass
+    return render(request,"error.html")
 
 
 # userUrls=[
@@ -218,7 +281,7 @@ class UserViews(object):
 userv=UserViews()
 
 houseUrls=[
-    url(r"^$",userv.housev,name="house"),
+    url(r"^$",housev,name="house"),
     url(r"^add/",userv.add_housev,name="add_house"),
     url(r"^find/",userv.find_housev,name="find_house"),
     url(r"^alter/",userv.alter_housev,name="alter_house"),
@@ -230,15 +293,17 @@ mainUrls=[
 ]
 
 
+
 userUrls=[
-    url(r"^$",userv.mainv,name="main"),
-    url(r"^main/",userv.mainv,name="main"),
+    url(r"^$",mainv,name="main"),
+    url(r"^main/",mainv,name="main"),
     url(r"^house/",include(houseUrls)),
     url(r"^client/",userv.clientv,name="client"),
     url(r"^achievement/",userv.achievementv,name="achievement"),
     url(r"^not_permitted/",TemplateView.as_view(template_name="permission_denied.html"),name="PermissionDenied"),
-    url(r"^login/",userv.loginv,name="login"),
+    url(r"^login/",loginv,name="login"),
     url(r"^logout/",userv.logoutv,name="logout"),
     url(r"^api/",userv.apiv,name="api"),
     url(r"^manage/",userv.managev,name="manage"),
+    url(r"^loading/" , loadingv , name = "loading"),
 ]

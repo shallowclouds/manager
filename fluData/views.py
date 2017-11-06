@@ -13,8 +13,8 @@ from django.urls import reverse
 def index(request):
     # print(request.POST["userName"])
     # if request.method=="GET":
-    print(request.method)
-    return render(request, "login.html")
+    # print(request.method)
+    return render(request, "index.html")
 
 
 class User_API():

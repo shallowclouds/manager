@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>错误</title>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/user/main">管理平台</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/user/main">总览</a></li>
+                    <li><a href="/user/house">房源</a></li>
+                    <li><a href="/user/client">客户</a></li>
+                    <li><a href="/user/achievement">业绩</a></li>
+                    <li><a href="/user/manage">管理</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right ng-scope" ng-controller="user_ctrl" id="header_me">
+                    <li>
+                        <a href="/user/main" wt-tracker="Header|Menu|Goto Apply">
+                            用户：{{ user.name }}
+                        </a>
+                        </li>
+                        <li>
+                            <a href="/user/main" wt-tracker="Header|Menu|Goto Apply">个人设置</a>
+                        </li>
+                        <li>
+                            <a href="/user/logout" wt-tracker="Header|Menu|Goto Apply">退出登陆</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron">
+            <div class="container">
+                <h1>{{ error.title }}</h1><br>
+                <h2>{{ error.detail }}</h2>
+                    <p><a class="btn btn-primary btn-lg" href="/user/main" role="button">返回主页面</a></p>
+            </div>
+        </div>
+        <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </body>
+</html>

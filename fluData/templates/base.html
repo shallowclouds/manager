@@ -1,110 +1,72 @@
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <style> 
-                p.endl
-                {
-                width:11em; 
-                word-wrap:break-word;
-                }
-        </style>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>管理页面-测试</title>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     </head>
-    
     <body>
-        
-    <title>管理页面</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css.css">
-    <script src="/static/jquery-1.9.1.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
-    <div class="navbar navbar-fixed-top navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/user/main">管理平台</a>
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar navbar-default">
+                    <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{% url 'main' %}">管理平台<span class="badge">新</span></a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li role="presentation" class="active"><a href="{% url 'main' %}">总览</a></li>
+                            <li role="presentation"><a href="{% url 'house' %}">房源</a></li>
+                            <li role="presentation"><a href="{% url 'client' %}">客户</a></li>
+                            <li role="presentation"><a href="{% url 'achievement' %}">业绩</a></li>
+                            <li role="presentation"><a href="{% url 'manage' %}">管理</a></li>
+                        </ul>
+                    </div>
+                    </div>
+                </nav>
             </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/user/main">总览</a></li>
-                    <li><a href="/user/house">房源</a></li>
-                    <li><a href="/user/client">客户</a></li>
-                    <li><a href="/user/achievement">业绩</a></li>
-                    <li><a href="/user/manage">管理</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right ng-scope" ng-controller="user_ctrl" id="header_me">
-                    <li>
-                        <a href="/user/main" wt-tracker="Header|Menu|Goto Apply">
-                            用户：{{ user.name }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/user/main" wt-tracker="Header|Menu|Goto Apply">个人设置</a>
-                    </li>
-                    <li>
-                        <a href="/user/logout" wt-tracker="Header|Menu|Goto Apply">退出登陆</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
-        {% block left_col %}
-            
-        <div class="col-md-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="#">测试</a>
-                    <a style="float:right;" href="#">right</a>
-                </div>
-                <div class="panel-body">
-                    <ul class="nav nav-stack">
-                        <li>测试1</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        {% endblock %}
+            <div class="row">
+                <div class="col-md-2">
+                    {% block left_col %}
 
-        {% block center %}
-        
-        <div class="col-md-9">
-            <div class="row" >
-                <div class="col-sm-6 ">
-                    <div class="panel panel-info">
-                    <div class="panel-body">
-                        <div class="panel-heading">
-                            <p class="panel-title">欢迎</p>
+                    <div class="panel-body panel-info">
+                        <div class="panel-body">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li role="presentation"><a href="{% url 'main' %}">添加公告1</a></li>
+                                <li role="presentation"><a href="{% url 'main' %}">添加公告</a></li>
+                                <li role="presentation"><a href="{% url 'main' %}">添加公告</a></li>
+                                <li role="presentation"><a href="{% url 'main' %}">添加公告</a></li>
+                                <li role="presentation"><a href="{% url 'main' %}">添加公告</a></li>
+                                <li role="presentation"><a href="{% url 'main' %}">添加公告</a></li>
+                                <li role="presentation"><a href="{% url 'main' %}">添加公告</a></li>
+                            </ul>
                         </div>
-                        <p class="endl">
-                            欢迎使用数据管理系统QwQ
-                        </p>
                     </div>
-                    </div>
+
+                    {% endblock %}
                 </div>
-                <div class="col-sm-3 ">
-                    <div class="panel panel-info">
-                    <div class="panel-body">
-                        <div class="panel-heading">
-                            <p class="panel-title">公告</p>
-                        </div>
-                        <p class="endl">
-                            您可以在此发布和删除公告
-                        </p>
-                    </div>
-                    </div>
+
+                <div class="col-md-10">
+                    {% block center %}
+
+                    {% endblock %}
+                </div>
+
+
+                <div class="col-md-10">
                 </div>
             </div>
         </div>
 
-        {% endblock %}
-    </div>
-    
-    </body></html>
+        <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </body>
+</html>

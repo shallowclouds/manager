@@ -1,50 +1,21 @@
 {% extends "base.html" %}
 
 {% block left_col %}
-    <div class="col-md-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="#">公告管理</a>
-                    <a style="float:right;" href="#"></a>
-                </div>
-                <div class="panel-body">
-                    <ul class="nav nav-stack">
-                        <li><a href="add">添加公告</a></li>
-                    </ul>
-                </div>
-            </div>
+    <div class="panel-body panel-info">
+        <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="{% url 'main' %}">添加公告1</a></li>
+                <li role="presentation"><a href="{% url 'main' %}">添加公告</a></li>
+                <li role="presentation"><a href="{% url 'main' %}">添加公告</a></li>
+                <li role="presentation"><a href="{% url 'main' %}">添加公告</a></li>
+                <li role="presentation"><a href="{% url 'main' %}">添加公告</a></li>
+                <li role="presentation"><a href="{% url 'main' %}">添加公告</a></li>
+                <li role="presentation"><a href="{% url 'main' %}">添加公告</a></li>
+            </ul>
+        </div>
     </div>
 {% endblock %}
 
 {% block center %}
-        <div class="col-md-9">
-            <div class="row" >
-                <div class="col-sm-6 ">
-                    <div class="panel panel-info">
-                    <div class="panel-body">
-                        <div class="panel-heading">
-                            <p class="panel-title">个人信息</p>
-                        </div>
-                        <p class="endl">
-                            {% for useri in user.profile %}
-                                {{ useri }}<br>
-                            {% endfor %}
-                        </p>
-                    </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 ">
-                    <div class="panel panel-info">
-                    <div class="panel-body">
-                        <div class="panel-heading">
-                            <p class="panel-title">公告</p>
-                        </div>
-                        <p class="endl">
-                            您可以在此发布和删除公告
-                        </p>
-                    </div>
-                    </div>
-                </div>
-            </div>
-    </div>
+
 {% endblock %}
