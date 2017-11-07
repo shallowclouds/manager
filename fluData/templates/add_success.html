@@ -1,0 +1,9 @@
+{% extends "base_top.html" %}
+
+{% block center %}
+<div class="alert alert-success" role="alert">
+    保存成功！
+    <a href="{% url 'add_house' %}">继续添加信息</a>
+    <a href="{% url 'main' %}">回到主页面</a>
+</div> 
+{% endblock %}

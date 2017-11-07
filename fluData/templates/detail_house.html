@@ -1,0 +1,31 @@
+{% extends "base2.html" %}
+
+{% block center %}
+<div class="col-md-2"></div>
+<div class="col-md-8">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">内部序号：{{ house.detail.id }}</h3>
+        </div>
+        <div class="panel-body">
+            客户姓名：{{house.detail.name}}<br>
+            电话号码：{{house.detail.phone}}<br>
+            售价：{{house.detail.price}} {{house.detail.price_unit}}<br>
+            类型：{{house.detail.house_type}}<br>
+            钥匙位置：{{house.detail.ikeys}}<br>
+            小区：{{house.detail.community}}<br>
+            地址：{{house.detail.position}}<br>
+            面积：{{house.detail.area}}平方<br>
+            户型：{{house.detail.kind}}<br>
+            登记者：{{house.detail.belong}}<br>
+            装修情况：{{house.detail.decor}}<br>
+            等级：{{house.detail.level}}<br>
+            状态：{{house.detail.status}}<br>
+            楼层：{{house.detail.floor}}<br>
+            备注：{{house.detail.more}}<br>
+        </div>
+    </div>
+</div>
+<div class="col-md-2"></div>
+{% endblock %}
+

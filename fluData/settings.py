@@ -25,7 +25,7 @@ SECRET_KEY = 'fvm#%8=t!(vesk5pv0r9f3kq7wbxd&=1rm=4h5$@+^^vv++g$('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["sz.yorling.com","127.0.0.1"]
 
 
 # Application definition

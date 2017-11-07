@@ -216,7 +216,7 @@ def GetUserProfile(request):
 def get_normal_context(request):
     ndict = {
         "user":{
-            "profile":request.session["profile"]
+            "profile":""
             }
             }
     return ndict
@@ -247,45 +247,83 @@ def loginv(request):
     return render(request,"login.html")
 
 def loadingv(request):
-    GetUserProfile(request)
+    # GetUserProfile(request)
     return HttpResponseRedirect("/user/main/")
 
 @login_required(login_url = "login")
 def housev(request):
     if request.method == "GET":#读取资源
-        print(request.body==b'')
-        if "key[]" in request.GET:
-            pass
-        else:
-            return render(request, "house.html")
-    elif request.method == "POST":#创建资源
-        pass
-    elif request.method == "PUT":#更新资源
-        pass
-    elif request.method == "DELETE":#删除资源
-        pass
+        alls = models.House.objects.all()
+        contexts = {"house":{"about":[]}}
+        for i in alls:
+            contexts["house"]["about"].append(i.get_house_about())
+        return render(request, "house.html", contexts)
+    return render(request, "error.html")
+
+@login_required(login_url = "login")
+def add_house(request):
+    if request.method == "GET":
+        return render(request, "add_house.html")
+    elif request.method == "POST":
+        # print(request.POST["name"])
+        new_house = models.House(
+            name=request.POST["name"],
+            phone=request.POST["phone"],
+            price=request.POST["price"],
+            price_unit=request.POST["price_unit"],
+            house_type=request.POST["house_type"],
+            ikeys=request.POST["ikeys"],
+            community=request.POST["community"],
+            position=request.POST["position"],
+            area=request.POST["area"],
+            kind=request.POST["kind"],
+            more=request.POST["more"],
+            belong=self.user.userprofile.id,
+            decor=request.POST["decor"],
+            level=self.user.userprofile.level,
+            status=request.POST["status"],
+            floor=request.POST["floor"]
+        )
+        new_house.save()
+        print(new_house.name)
+        return render(request, "add_success.html")
+    return render(request, "error.html")
+
+@login_required(login_url = "login")
+def detail_house(request):
+    if request.method == "GET":
+        t_id = int(request.GET["id"])
+        t_src = models.House.objects.get(id = t_id)
+        return render(request, "detail_house.html", {"house":{"detail":t_src.get_house_detail()}})
+    return render(request, "error.html")
+
+@login_required(login_url = "login")
+def alter_house(request):
+    if request.method == "GET":
+        t_id = int(request.GET["id"])
+        t_src = models.House.objects.get(id = t_id)
+        return render(request, "alter_house.html", {"house":{"detail":t_src.get_house_detail}})
+    elif request.method == "POST":
+        t_id = int(request.GET["id"])
+        t_src = models.House.objects.get(id = t_id)
+        t_alter = request.GET["alter_house"]
+        # for i in t_alter:
+            # t_src.update(str())
+        # t_src.update()
+    return render(request, "error.html")
+
+@login_required(login_url = "login")
+def find_house(request):
     return render(request,"error.html")
 
-
-# userUrls=[
-#     url(r"^main/",CView.get(name="main"),name="main"),
-#     url(r"^house/",views.User_Views.get(name="house"),name="house"),
-#     url(r"^client/",views.User_Views.get(name="client"),name="client"),
-#     url(r"^achievement/",views.User_Views.get(name="achievement"),name="achievement"),
-#     url(r"^profile/",views.User_Views.get(name="profile"),name="profile"),
-#     url(r"^not_permitted",TemplateView.as_view(template_name="user/permission_denied.html"),name="PermissionDenied"),
-#     url(r"^login/",views.login),
-#     url(r"^logout/",views.logout),
-#     url(r"^api/",include(apiUrls)),
-# ]
 userv=UserViews()
 
 houseUrls=[
     url(r"^$",housev,name="house"),
-    url(r"^add/",userv.add_housev,name="add_house"),
-    url(r"^find/",userv.find_housev,name="find_house"),
-    url(r"^alter/",userv.alter_housev,name="alter_house"),
-    url(r"^detail",userv.detail_housev,name="detail_house"),
+    url(r"^add/",add_house,name="add_house"),
+    url(r"^find/",find_house,name="find_house"),
+    url(r"^alter/",alter_house,name="alter_house"),
+    url(r"^detail/",detail_house,name="detail_house"),
 ]
 
 mainUrls=[

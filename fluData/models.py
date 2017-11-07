@@ -55,7 +55,7 @@ class House(models.Model):
     
     house_type = models.CharField(u"类型", max_length = 20, null = True, choices = TYPE_CHOICES, default = SELL)
 
-    keys = models.CharField(u"钥匙位置", max_length = 40, null = True, default = "")
+    ikeys = models.CharField(u"钥匙位置", max_length = 40, null = True, default = "")
     community = models.CharField(u"社区", max_length = 50,null = True, default = "")
     position = models.CharField(u"地址", max_length = 200, null = True, default = "")
     area = models.IntegerField(u"面积", null = True, default = 0)
@@ -81,7 +81,7 @@ class House(models.Model):
             "price" : self.price,
             "price_unit" : self.price_unit,
             "house_type" : self.house_type,
-            "keys" : self.keys,
+            "ikeys" : self.ikeys,
             "community" : self.community,
             "position" : self.position,
             "area" : self.area,
@@ -105,6 +105,9 @@ class House(models.Model):
             "decor" : self.decor,
             "kind" : self.kind,
             "floor" : self.floor,
+            "price" : self.price,
+            "price_unit" : self.price_unit,
+            "community" : self.community,
         }
         return about
 

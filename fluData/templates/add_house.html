@@ -1,0 +1,86 @@
+{% extends "base_top.html" %}
+
+{% block center %}
+    <div class="page-header">
+        <h2>添加信息<small>新增加数据</small></h2>
+        <p>请在此处添加新的数据，并尽量保证数据完整准确。</p>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">客户姓名：</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="phone">电话号码：</label>
+            <input type="tel" class="form-control" name="phone" id="phone" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="price">价格：</label>
+            <input type="number" class="form-control" name="price" id="price" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="price_unit">价格单位：</label>
+            <select class="form-control" name="price_unit" id="price_unit">
+                    <option>万元</option>
+                    <option>千元</option>
+                    <option>百元</option>
+                    <option>  元</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="house_type">类型：</label>
+            <select class="form-control" name="house_type" id="house_type">
+                    <option>出售</option>
+                    <option>出租</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ikeys">钥匙存放位置：</label>
+            <input type="text" class="form-control" name="ikeys" id="ikeys" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="community">小区：</label>
+            <input type="text" class="form-control" name="community" id="community" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="position">地址：</label>
+            <input type="text" class="form-control" name="position" id="position" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="area">面积(㎡)：</label>
+            <input type="number" class="form-control" name="area" id="area" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="kind">户型：</label>
+            <input type="text" class="form-control" name="kind" id="kind" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="decor">装修情况：</label>
+            <select class="form-control" name="decor" id="decor">
+                    <option>清水</option>
+                    <option>简装</option>
+                    <option>中装</option>
+                    <option>精装</option>
+                    <option>豪装</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="status">状态：</label>
+            <select class="form-control" name="status" id="status">
+                    <option>有效</option>
+                    <option>交易完成</option>
+                    <option>失效</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="floor">楼层：</label>
+            <input type="number" class="form-control" name="floor" id="floor" placeholder="1">
+        </div>
+        <div class="form-group">
+            <label for="more">备注：</label>
+            <textarea class="form-control" name="more" id="more" placeholder="无" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-info">保存</button>
+    </form>
+{% endblock %}
