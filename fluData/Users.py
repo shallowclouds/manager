@@ -278,9 +278,9 @@ def add_house(request):
             area=request.POST["area"],
             kind=request.POST["kind"],
             more=request.POST["more"],
-            belong=self.user.userprofile.id,
+            belong=request.user.userprofile.id,
             decor=request.POST["decor"],
-            level=self.user.userprofile.level,
+            level=request.user.userprofile.level,
             status=request.POST["status"],
             floor=request.POST["floor"]
         )
