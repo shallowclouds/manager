@@ -1,0 +1,55 @@
+{% extends "user/base.html" %}
+
+{% block if_main_active %}
+{% endblock %}
+
+{% block if_house_active %}class="active"{% endblock %}
+
+{% block center %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>#</th>
+                <th>客户姓名</th>
+                <th>电话号码</th>
+                <th>小区</th>
+                <th>户型</th>
+                <th>装修情况</th>
+                <th>楼层</th>
+                <th>单元</th>
+                <th>价格</th>
+                <th>面积</th>
+                <th>操作</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>孙传芳</td>
+                <td>15281171530</td>
+                <td>上河鹂岛</td>
+                <td>一室一厅两卫</td>
+                <td>20</td>
+                <td>11栋2单元</td>
+                <td>23 万</td>
+                <td>110 ㎡</td>
+                <td>豪装</td>
+                <td>
+                    <a href="#" class="glyphicon glyphicon-pencil"></a>
+                    <a href="#" class="glyphicon glyphicon-info-sign"></a>
+                </td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>孙传芳</td>
+                <td>15281171530</td>
+                <td>上河鹂岛</td>
+                <td>一室一厅两卫</td>
+                <td>20</td>
+                <td>11栋2单元</td>
+                <td>23 万</td>
+                <td>110 ㎡</td>
+                <td>豪装</td>
+                <td><a href="#" class="glyphicon glyphicon-pencil"></a><a href="#" class="glyphicon glyphicon-info-sign"></a></td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

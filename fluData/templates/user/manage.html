@@ -1,0 +1,13 @@
+{% extends "user/base.html" %}
+
+{% block if_main_active %}{% endblock %}
+
+{% block if_manage_active %}class="active"{% endblock %}
+
+{% block center %}
+    <div class="jumbotron">
+        <h1>该页面仍然还在建设中。。</h1>
+        <p>施工ing</p>
+        <p><a class="btn btn-primary btn-lg" href="{% url 'main' %}" role="button">回到总览页面</a></p>
+    </div>
+{% endblock %}
