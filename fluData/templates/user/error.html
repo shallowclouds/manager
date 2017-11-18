@@ -1,0 +1,13 @@
+{% extends "user/base.html" %}
+
+{% block if_main_active %}
+{% endblock %}
+
+{% block center %}
+<div class="jumbotron">
+        <h1>{{ error.title }}</h1>
+        <p>{{ error.content }}</p>
+        <p><a class="btn btn-primary btn-lg" href="{% url 'house' %}" role="button">返回房源页面</a></p>
+      </div>
+
+{% endblock %}

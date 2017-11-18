@@ -1,0 +1,78 @@
+{% extends 'user/house.html' %}
+
+{% block container %}container{% endblock %}
+
+{% block center %}
+<div class="page-header">
+    <h2>{{ house.detail.name }} <small>{{ house.detail.phone }}</small></h2>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading">房源信息：</div>
+    <div class="panel-body">
+        <div class="col-sm-6">
+            <dl class="dl-horizontal">
+                <dt>客户姓名：</dt>
+                <dd>{{ house.detail.name }}</dd>
+                <dt>手机号码：</dt>
+                <dd>{{ house.detail.phone }}</dd>
+                <dt>价格：</dt>
+                <dd>{{ house.detail.price }}{{ house.detail.price_unit }}</dd>
+                <dt>类型：</dt>
+                <dd>{{ house.detail.house_type }}</dd>
+                <dt>钥匙编号/位置：</dt>
+                <dd>{{ house.detail.ikeys }}</dd>
+                <dt>小区：</dt>
+                <dd>{{ house.detail.community }}</dd>
+                <dt>栋数/单元：</dt>
+                <dd>{{ house.detail.position }}</dd>
+                <dt>上次修改时间：</dt>
+                <dd>{{ house.detail.last_change }}</dd>
+                
+            </dl>
+        </div>
+        <div class="col-sm-6">
+            <dl class="dl-horizontal">
+                <dt>权限等级：</dt>
+                <dd>{{ house.detail.level }}级</dd>
+                <dt>登记人：</dt>
+                <dd>{{ house.detail.belong }}</dd>
+                <dt>房源状态：</dt>
+                <dd>{{ house.detail.status }}</dd>
+                <dt>装修情况：</dt>
+                <dd>{{ house.detail.decor }}</dd>
+                <dt>面积：</dt>
+                <dd>{{ house.detail.area }}㎡</dd>
+                <dt>户型：</dt>
+                <dd>{{ house.detail.kind }}</dd>
+                <dt>楼层：</dt>
+                <dd>{{ house.detail.floor }}楼</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-info">
+    <div class="panel-heading">备注：</div>
+    <div class="panel-body">
+        <p>{{ house.detail.more }}</p>
+    </div>
+</div>
+
+<div class="panel panel-info">
+    <div class="panel-heading">照片：</div>
+    <div class="panel-body">
+        暂无
+    </div>
+</div>
+
+<div class="panel panel-info">
+    <div class="panel-heading">操作：</div>
+    <div class="panel-body">
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <a href="{% url 'house/alter' %}?id={{ house.detail.id }}" class="btn btn-default">修改</a>
+            <a href="{% url 'house/add' %}" class="btn btn-default">添加房源</a>
+            <a href="#" class="btn btn-default disabled">上传照片</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

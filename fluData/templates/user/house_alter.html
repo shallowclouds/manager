@@ -1,0 +1,104 @@
+{% extends 'user/house.html' %}
+
+{% block container %}container{% endblock %}
+
+{% block title %}修改房源{% endblock %}
+
+{% block center %}
+<div class="page-header">
+    <h2>修改房源 <small>请务必仔细检查信息，不要重复提交，信息尽量详细。</small></h2>
+</div>
+<div class="panel panel-warning">
+    <div class="panel-heading">修改信息</div>
+    <div class="panel-body">
+        <form method="POST" action="{% url 'house/alter' %}">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{ id }}">
+        <div class="form-group">
+            <label for="name">客户姓名：</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="" value="{{ name }}">
+        </div>
+        <div class="form-group">
+            <label for="phone">电话号码：</label>
+            <input type="tel" class="form-control" name="phone" id="phone" placeholder="" value="{{ phone }}">
+        </div>
+        <div class="form-group">
+            <label for="price">价格：</label>
+            <input type="number" class="form-control" name="price" id="price" placeholder="" value="{{ price }}">
+        </div>
+        <div class="form-group">
+            <label for="price_unit">价格单位：</label>
+            <select class="form-control" name="price_unit" id="price_unit" value="{{ price_unit }}">
+                    <option>万元</option>
+                    <option>千元</option>
+                    <option>百元</option>
+                    <option>  元</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="house_type">类型：</label>
+            <select class="form-control" name="house_type" id="house_type" value="{{ house_type }}">
+                    <option>出售</option>
+                    <option>出租</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ikeys">钥匙编号/位置：</label>
+            <input type="text" class="form-control" name="ikeys" id="ikeys" placeholder="" value="{{ ikeys }}">
+        </div>
+        <div class="form-group">
+            <label for="community">小区：</label>
+            <input type="text" class="form-control" name="community" id="community" placeholder="" value="{{ community }}">
+        </div>
+        <div class="form-group">
+            <label for="position">单元/栋数：</label>
+            <input type="text" class="form-control" name="position" id="position" placeholder="" value="{{ position }}">
+        </div>
+        <div class="form-group">
+            <label for="area">面积(㎡)：</label>
+            <input type="number" class="form-control" name="area" id="area" placeholder="" value="{{ area }}">
+        </div>
+        <div class="form-group">
+            <label for="kind">户型：</label>
+            <input type="text" class="form-control" name="kind" id="kind" placeholder="" value="{{ kind }}">
+        </div>
+        <div class="form-group">
+            <label for="decor">装修情况：</label>
+            <select class="form-control" name="decor" id="decor" value="{{ decor }}">
+                    <option>清水</option>
+                    <option>简装</option>
+                    <option>中装</option>
+                    <option>精装</option>
+                    <option>豪装</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="status">状态：</label>
+            <select class="form-control" name="status" id="status" value="{{ status }}">
+                    <option>有效</option>
+                    <option>交易完成</option>
+                    <option>失效</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="floor">楼层：</label>
+            <input type="number" class="form-control" name="floor" id="floor" placeholder="" value="{{ floor }}">
+        </div>
+        <div class="form-group">
+            <label for="level">权限级别：</label>
+            <select class="form-control" name="level" id="level" value="{{ level }}">
+                    <option>3</option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="more">备注：</label value="{{ more }}">
+            <textarea class="form-control" name="more" id="more" placeholder="无" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-info">保存</button>
+    </form>
+    </div>
+</div>
+{% endblock %}

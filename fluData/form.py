@@ -1,6 +1,35 @@
 from django import forms
 from django.contrib import auth
 from django.contrib.auth import get_user_model
+from .models import House, UserProfile
+
+class AddHouseForm(forms.ModelForm):
+    class Meta:
+        model = House
+        fields = ['name', 'phone', 'price', 'price_unit', 'house_type',
+        'ikeys', 'community', 'position', 'area', 'kind', 'more', 'floor',
+        'status', 'decor',
+        ]
+    # name = forms.CharField(max_length=30, required=False)
+
+    # phone = forms.CharField(max_length=20, required=False)
+
+    # price = forms.IntegerField(required=False)
+
+    # price_unit = forms.CharField(max_length=20, required=False)
+
+    # house_type = forms.CharField(max_length=20, required=False)
+    # ikeys = forms.CharField(max_length=40, required=False)
+    # community = forms.CharField(max_length=50, required=False)
+    # position = forms.CharField(max_length=200, required=False)
+    # area = forms.IntegerField(required=False)
+    # kind = forms.CharField(max_length=50, required=False)
+    # more = forms.CharField(max_length=1000, required=False)
+    # floor = forms.IntegerField(required=False)
+    # status = forms.CharField(max_length=20, required=False)
+    # decor = forms.CharField(max_length=50, required=False)
+
+
 
 class LoginUserForm(forms.Form):
     username = forms.CharField(label=u'账 号',error_messages={'required':u'账号不能为空'},

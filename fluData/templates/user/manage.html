@@ -3,11 +3,47 @@
 {% block if_main_active %}{% endblock %}
 
 {% block if_manage_active %}class="active"{% endblock %}
+{% block container %}container{% endblock %}
 
 {% block center %}
-    <div class="jumbotron">
-        <h1>该页面仍然还在建设中。。</h1>
-        <p>施工ing</p>
-        <p><a class="btn btn-primary btn-lg" href="{% url 'main' %}" role="button">回到总览页面</a></p>
+    <div class="panel panel-info">
+        <div class="panel-heading">员工</div>
+        <div class="panel-body">
+                <div class="table-responsive">
+                        <table class="table table-striped" id="user_tables">
+                            <tr>
+                                <th>#</th>
+                                <th>员工姓名</th>
+                                <th>电话号码</th>
+                                <th>权限等级</th>
+                                <th>用户名称</th>
+                                <th>上次签到时间</th>
+                                <th>操作</th>
+                            </tr>
+                            {% for i in users %}
+                            <tr>
+                                <td>{{ i.id }}</td>
+                                <td>{{ i.name }}</td>
+                                <td>{{ i.phone }}</td>
+                                <td>{{ i.level }}</td>
+                                <td>{{ i.username }}</td>
+                                <td>{{ i.last_check }}</td>
+                                <td>
+                                    <a href="{% url 'house' %}?id={{ i.id }}" class="glyphicon glyphicon-pencil"></a>
+                                    <a href="{% url 'house' %}?id={{ i.id }}" class="glyphicon glyphicon-info-sign"></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+        </div>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading">操作</div>
+        <div class="panel-body">
+            <a href="{% url 'auth/add' %}" class="btn btn-default glyphicon glyphicon-plus" role="button">添加员工</a>
+        </div>
+
     </div>
 {% endblock %}

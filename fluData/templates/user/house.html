@@ -5,9 +5,93 @@
 
 {% block if_house_active %}class="active"{% endblock %}
 
+{% block title %}房源{% endblock %}
+
 {% block center %}
+    <script>
+        function refresh_post()
+        {
+            $.ajax({
+                url:"{% url 'api/refresh' %}",
+                data:{csrfmiddlewaretoken:"{{csrf_token}}"},
+                type:"POST",
+                success:function(){},
+            });
+        }
+
+        function find_post()
+        {
+            find_txt = String(document.getElementById("find_text").value);
+            res = find_txt.split(/\s+/);
+            nres={}
+            for(var i=0,pos=0;i<res.length;i++)
+            {
+                if(res[i] != "")
+                {
+                    nres[String(pos)]=res[i];
+                    pos++;
+                }
+            }
+            // console.log(res)
+            if(!nres.length)
+                nres["0"]="";
+            nres={data:JSON.stringify(nres), csrfmiddlewaretoken:"{{csrf_token}}"};
+            // $.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}' },});
+            // console.log(nres);
+            hstr = "<tr><th>#</th><th>客户姓名</th><th>电话号码</th><th>小区</th><th>户型</th><th>装修情况</th><th>楼层</th><th>单元</th><th>价格</th><th>面积</th><th>操作</th></tr>"
+            document.getElementById("house_tables").innerHTML=hstr
+            $.ajax({
+                url:"{% url 'house' %}", 
+                data:nres, 
+                dataType:"json", 
+                error:function(data){},
+                success:function(data){
+                    for(var i in data)
+                    {
+                        console.log(data[i]);
+                        hstr+=  ("<tr>"+
+                                "<td>"+data[i].id+"</td>"+
+                                "<td>"+data[i].name+"</td>"+
+                                "<td>"+data[i].phone+"</td>"+
+                                "<td>"+data[i].community+"</td>"+
+                                "<td>"+data[i].kind+"</td>"+
+                                "<td>"+data[i].decor+"</td>"+
+                                "<td>"+data[i].floor+"</td>"+
+                                "<td>"+data[i].position+"</td>"+
+                                "<td>"+data[i].price+data[i].price_unit+"</td>"+
+                                "<td>"+data[i].area+"㎡</td>"+
+                                "<td>"+
+                                "<a href=\"{% url 'house/detail' %}?id="+data[i].id+
+                                "\" class=\"glyphicon glyphicon-info-sign\"></a>"+
+                                "<a href=\"{% url 'house/detail' %}?id="+data[i].id+
+                                "\" class=\"glyphicon glyphicon-pencil\"></a>"+
+                                "</td>"+
+                                "</tr>")
+                    }
+                    document.getElementById("house_tables").innerHTML=hstr;
+                },
+                type:"POST",
+            });
+            
+        }
+    </script>
+    <div class="panel panel-default">
+        <div class="panel-heading">操作</div>
+        <div class="panel-body">
+                <a href="{% url 'house/add' %}" class="btn btn-default glyphicon glyphicon-plus" role="button">添加房源</a>
+                <button class="btn btn-default glyphicon glyphicon-repeat" onclick="refresh_post()">刷新数据</button>
+        </div>
+    </div>
+    <div>
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" onclick="find_post()">查找数据</button>
+            </span>
+            <input type="text" class="form-control" placeholder="输入你想查找的关键字 用空格隔开" id="find_text">
+        </div>
+    </div>
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped" id="house_tables">
             <tr>
                 <th>#</th>
                 <th>客户姓名</th>
@@ -21,35 +105,24 @@
                 <th>面积</th>
                 <th>操作</th>
             </tr>
+            {% for i in house.about %}
             <tr>
-                <td>1</td>
-                <td>孙传芳</td>
-                <td>15281171530</td>
-                <td>上河鹂岛</td>
-                <td>一室一厅两卫</td>
-                <td>20</td>
-                <td>11栋2单元</td>
-                <td>23 万</td>
-                <td>110 ㎡</td>
-                <td>豪装</td>
+                <td>{{ i.id }}</td>
+                <td>{{ i.name }}</td>
+                <td>{{ i.phone }}</td>
+                <td>{{ i.community }}</td>
+                <td>{{ i.kind }}</td>
+                <td>{{ i.decor }}</td>
+                <td>{{ i.floor }}</td>
+                <td>{{ i.position }}</td>
+                <td>{{ i.price }} {{ i.price_unit }}</td>
+                <td>{{ i.area }}㎡</td>
                 <td>
-                    <a href="#" class="glyphicon glyphicon-pencil"></a>
-                    <a href="#" class="glyphicon glyphicon-info-sign"></a>
+                    <a href="{% url 'house/alter' %}?id={{ i.id }}" class="glyphicon glyphicon-pencil"></a>
+                    <a href="{% url 'house/detail' %}?id={{ i.id }}" class="glyphicon glyphicon-info-sign"></a>
                 </td>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>孙传芳</td>
-                <td>15281171530</td>
-                <td>上河鹂岛</td>
-                <td>一室一厅两卫</td>
-                <td>20</td>
-                <td>11栋2单元</td>
-                <td>23 万</td>
-                <td>110 ㎡</td>
-                <td>豪装</td>
-                <td><a href="#" class="glyphicon glyphicon-pencil"></a><a href="#" class="glyphicon glyphicon-info-sign"></a></td>
-            </tr>
+            {% endfor %}
         </table>
     </div>
 {% endblock %}
