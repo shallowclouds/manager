@@ -69,8 +69,9 @@ class House(models.Model):
 
     def get_house_detail(self):
         try:
-            t_belong = UserProfile.objects.get(id=self.id).name
-        except:
+            t_belong = UserProfile.objects.get(id=self.belong).name
+        except Exception as e:
+            print(e)
             t_belong = self.id
 
         try:

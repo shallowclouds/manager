@@ -103,6 +103,7 @@ class house_add_view(View):
                 t_house[i]=request.POST[i]
         if t_house["floor"]=="":
             t_house["floor"]=0
+        t_house["belong"]=request.user.userprofile.id
         tt_house=models.House(**t_house)
         tt_house.save()
         return render(request, "user/house_add_success.html")
@@ -211,8 +212,8 @@ class user_add(View):
     @method_decorator(login_required(login_url="login"))
     def post(self, request, *args, **kwargs):
         try:
-            usr_dict = {"username":request.POST["username"], "password":request.POST["password"], "email":request.POST["email"]}
-            usr = User(**usr_dict)
+            usr_dict = {"password":request.POST["password"], "email":request.POST["email"]}
+            usr = User.objects.create_user(request.POST["username"], **usr_dict)
             usr.save()
             usrpro_dict = {"name":request.POST["name"], "phone":request.POST["phone"], "level":request.POST["level"], "user":usr}
             usrpro = models.UserProfile(**usrpro_dict)
